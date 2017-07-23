@@ -1,0 +1,81 @@
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://localhost/ci_vetro/services/currency/service.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://localhost/ci_vetro/services/currency/service.php">
+<types>
+<xsd:schema targetNamespace="http://localhost/ci_vetro/services/currency/service.php">
+<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+</xsd:schema>
+</types>
+<message name="service.getRateRequest">
+<part name="type" type="xsd:string"/>
+</message>
+<message name="service.getRateResponse">
+<part name="return" type="xsd:decimal"/>
+</message>
+<message name="service.getPriceRequest">
+<part name="rate" type="xsd:decimal"/>
+<part name="amount" type="xsd:decimal"/>
+<part name="foreign" type="xsd:string"/>
+</message>
+<message name="service.getPriceResponse">
+<part name="return" type="xsd:decimal"/>
+</message>
+<message name="service.getSurchargeRequest">
+<part name="id" type="xsd:int"/>
+<part name="amount" type="xsd:decimal"/>
+</message>
+<message name="service.getSurchargeResponse">
+<part name="return" type="xsd:decimal"/>
+</message>
+<portType name="currencyservicePortType">
+<operation name="service.getRate">
+<documentation>Get currency by type</documentation>
+<input message="tns:service.getRateRequest"/>
+<output message="tns:service.getRateResponse"/>
+</operation>
+<operation name="service.getPrice">
+<documentation>Get amount by rate</documentation>
+<input message="tns:service.getPriceRequest"/>
+<output message="tns:service.getPriceResponse"/>
+</operation>
+<operation name="service.getSurcharge">
+<documentation>Get charge by currency</documentation>
+<input message="tns:service.getSurchargeRequest"/>
+<output message="tns:service.getSurchargeResponse"/>
+</operation>
+</portType>
+<binding name="currencyserviceBinding" type="tns:currencyservicePortType">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="service.getRate">
+<soap:operation soapAction="http://localhost/ci_vetro/services/currency/service.php#getRate" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="http://localhost/ci_vetro/services/currency/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="http://localhost/ci_vetro/services/currency/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="service.getPrice">
+<soap:operation soapAction="http://localhost/ci_vetro/services/currency/service.php#getPrice" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="http://localhost/ci_vetro/services/currency/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="http://localhost/ci_vetro/services/currency/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="service.getSurcharge">
+<soap:operation soapAction="http://localhost/ci_vetro/services/currency/service.php#getSurcharge" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="http://localhost/ci_vetro/services/currency/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="http://localhost/ci_vetro/services/currency/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+</binding>
+<service name="currencyservice">
+<port name="currencyservicePort" binding="tns:currencyserviceBinding">
+<soap:address location="http://localhost/ci_vetro/services/currency/service.php"/>
+</port>
+</service>
+</definitions>
